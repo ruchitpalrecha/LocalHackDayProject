@@ -9,14 +9,31 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
-    let locationManager = CLLocationManager()
 
     @IBOutlet weak var mapView: MKMapView!
+    
+    private let locationManager = CLLocationManager()
+    private let currentLocation = CLLocation()
+    private let regionRadius: Double = 1000
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mapView.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        
         checkLocationServices()
+        mapView.mapType = .satelliteFlyover
+    }
+    
+    func centerMapOnUserLocation() {
+        guard let coordinate = locationManager.location?.coordinate else {return}
+        let coordinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        mapView.setRegion(coordinateRegion, animated: true)
     }
     
     func checkLocationServices() {
@@ -26,6 +43,7 @@ class MapViewController: UIViewController {
         // Show alert letting the user know they have to turn this on.
       }
     }
+    
     func checkLocationAuthorization() {
       switch CLLocationManager.authorizationStatus() {
       case .authorizedWhenInUse:
@@ -41,5 +59,9 @@ class MapViewController: UIViewController {
        break
       }
     }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+           centerMapOnUserLocation()
+       }
 
 }
