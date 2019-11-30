@@ -26,20 +26,28 @@
         <!--Item 1-->
         <scene sceneID="7y6-x4-lij">
             <objects>
-                <viewController id="aNi-Pe-GvC" sceneMemberID="viewController">
+                <viewController id="aNi-Pe-GvC" customClass="MapViewController" customModule="BorderControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jfl-2z-d0f">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zMa-Ax-DeS">
-                                <rect key="frame" x="0.0" y="35" width="414" height="778"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="iKF-Uy-vy2">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="iKF-Uy-vy2" firstAttribute="leading" secondItem="Clf-xJ-DmS" secondAttribute="leading" id="P2k-lt-fnQ"/>
+                            <constraint firstItem="Clf-xJ-DmS" firstAttribute="trailing" secondItem="iKF-Uy-vy2" secondAttribute="trailing" id="TUS-f8-LJ8"/>
+                            <constraint firstItem="iKF-Uy-vy2" firstAttribute="top" secondItem="Clf-xJ-DmS" secondAttribute="top" id="e6G-0B-ZGf"/>
+                            <constraint firstItem="Clf-xJ-DmS" firstAttribute="bottom" secondItem="iKF-Uy-vy2" secondAttribute="bottom" id="wQ3-Dm-Tug"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Clf-xJ-DmS"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="uLr-mb-s9o"/>
+                    <connections>
+                        <outlet property="mapView" destination="iKF-Uy-vy2" id="9Yc-IT-izV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qu2-PO-uI4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
