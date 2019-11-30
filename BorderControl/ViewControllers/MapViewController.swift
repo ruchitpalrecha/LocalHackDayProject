@@ -11,7 +11,13 @@ import MapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
+    var points = [CLLocationCoordinate2D]() {
+        didSet {
+            print(points)
+        }
+    }
 
+    @IBOutlet weak var drawBoundaryButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
     private let locationManager = CLLocationManager()
@@ -22,12 +28,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        drawBoundaryButton.setTitle("Draw!", for: .normal)
+        drawBoundaryButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        
         mapView.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         
         checkLocationServices()
         mapView.mapType = .satelliteFlyover
+        
+    }
+    
+    @objc func buttonAction(sender: UIButton!) {
+      print("Button tapped")
     }
     
     func centerMapOnUserLocation() {

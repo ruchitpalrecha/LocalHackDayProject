@@ -34,18 +34,29 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="iKF-Uy-vy2">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CW2-DR-7qo">
+                                <rect key="frame" x="329" y="759" width="85" height="54"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Clf-xJ-DmS" firstAttribute="trailing" secondItem="CW2-DR-7qo" secondAttribute="trailing" id="MgR-ba-ipO"/>
                             <constraint firstItem="iKF-Uy-vy2" firstAttribute="leading" secondItem="Clf-xJ-DmS" secondAttribute="leading" id="P2k-lt-fnQ"/>
                             <constraint firstItem="Clf-xJ-DmS" firstAttribute="trailing" secondItem="iKF-Uy-vy2" secondAttribute="trailing" id="TUS-f8-LJ8"/>
                             <constraint firstItem="iKF-Uy-vy2" firstAttribute="top" secondItem="Clf-xJ-DmS" secondAttribute="top" id="e6G-0B-ZGf"/>
+                            <constraint firstItem="CW2-DR-7qo" firstAttribute="top" secondItem="Clf-xJ-DmS" secondAttribute="top" id="lsB-7z-y1H"/>
+                            <constraint firstItem="Clf-xJ-DmS" firstAttribute="bottom" secondItem="CW2-DR-7qo" secondAttribute="bottom" id="qec-4y-cEO"/>
+                            <constraint firstItem="CW2-DR-7qo" firstAttribute="leading" secondItem="Clf-xJ-DmS" secondAttribute="leading" id="sTJ-6a-5iW"/>
+                            <constraint firstItem="Clf-xJ-DmS" firstAttribute="trailing" secondItem="CW2-DR-7qo" secondAttribute="trailing" id="vii-cr-YF7"/>
                             <constraint firstItem="Clf-xJ-DmS" firstAttribute="bottom" secondItem="iKF-Uy-vy2" secondAttribute="bottom" id="wQ3-Dm-Tug"/>
+                            <constraint firstItem="CW2-DR-7qo" firstAttribute="leading" secondItem="Clf-xJ-DmS" secondAttribute="leading" id="y89-oA-idB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Clf-xJ-DmS"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="uLr-mb-s9o"/>
                     <connections>
+                        <outlet property="drawBoundaryButton" destination="CW2-DR-7qo" id="B7h-zq-djn"/>
                         <outlet property="mapView" destination="iKF-Uy-vy2" id="9Yc-IT-izV"/>
                     </connections>
                 </viewController>
