@@ -53,6 +53,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func checkLocationServices() {
       if CLLocationManager.locationServicesEnabled() {
         checkLocationAuthorization()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
       } else {
         // Show alert letting the user know they have to turn this on.
       }
@@ -117,12 +120,13 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if (overlay is MKPolyline) {
             let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-            polylineRenderer.strokeColor = .orange
+            polylineRenderer.strokeColor = .red
             polylineRenderer.lineWidth = 5
             return polylineRenderer
         } else if (overlay is MKPolygon) {
             let polygonView = MKPolygonRenderer(overlay: overlay)
-            polygonView.fillColor = .magenta
+            polygonView.fillColor = UIColor.green.withAlphaComponent(0.2)
+            polygonView
             return polygonView
         }
         return MKPolylineRenderer(overlay: overlay)
