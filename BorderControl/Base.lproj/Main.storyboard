@@ -33,21 +33,24 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="iKF-Uy-vy2">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="delegate" destination="aNi-Pe-GvC" id="jtU-4K-nhA"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CW2-DR-7qo">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CW2-DR-7qo">
                                 <rect key="frame" x="0.0" y="759" width="414" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="cCs-8g-0eH"/>
                                 </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
-                                        <fragment content="Draw Boundary">
+                                        <fragment content="Draw!">
                                             <attributes>
                                                 <color key="NSColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                <font key="NSFont" size="37" name="Skia-Regular"/>
+                                                <font key="NSFont" size="43" name="Phosphate-Inline"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>

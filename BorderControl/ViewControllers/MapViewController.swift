@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+//import Foundation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -23,19 +24,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     private let currentLocation = CLLocation()
     private let regionRadius: Double = 1000
-    private var drawMode = false;
+    private var drawMode = false
+    private var searchMode = false
+    private let size: MKMapSize = MKMapSize(width: 5, height: 5)
+    private var polygon: MKPolygon = MKPolygon()
+    weak var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         drawBoundaryButton.setTitle("Draw!", for: .normal)
         drawBoundaryButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        drawBoundaryButton.setTitleColor(UIColor.white, for: .normal)
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         
         checkLocationServices()
         mapView.mapType = .satelliteFlyover
+        timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(checkStatusWithinPolygon), userInfo: nil, repeats: true)
         
     }
     
@@ -106,14 +113,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
             if(drawMode) {
-            let polygon = MKPolygon(coordinates: &points, count: points.count)
-            mapView.addOverlay(polygon) //Add polygon areas
-            points = [] //Reset points
-            mapView.isScrollEnabled = true
+                polygon = MKPolygon(coordinates: &points, count: points.count)
+                mapView.addOverlay(polygon) //Add polygon areas
+                points = [] //Reset points
+                mapView.isScrollEnabled = true
                 drawMode = false
+                searchMode = true
+                checkStatusWithinPolygon()
             }
         }
+    
+    @objc func checkStatusWithinPolygon() {
+        guard let coordinate = locationManager.location?.coordinate else {return}
+        let mapPoint: MKMapPoint = MKMapPoint(coordinate)
+        let rect: MKMapRect = MKMapRect(origin: mapPoint, size: size)
+        if(polygon.intersects(rect)) {
+            print("we are inside")
+        } else {
+            print("we are outside")
+        }
     }
+}
 
 extension MapViewController: MKMapViewDelegate {
     
@@ -126,7 +146,7 @@ extension MapViewController: MKMapViewDelegate {
         } else if (overlay is MKPolygon) {
             let polygonView = MKPolygonRenderer(overlay: overlay)
             polygonView.fillColor = UIColor.green.withAlphaComponent(0.2)
-            polygonView
+            //polygonView
             return polygonView
         }
         return MKPolylineRenderer(overlay: overlay)
