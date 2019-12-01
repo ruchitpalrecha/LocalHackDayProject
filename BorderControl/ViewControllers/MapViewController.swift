@@ -8,7 +8,6 @@
 
 import UIKit
 import MapKit
-//import Foundation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -18,6 +17,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
 
+    @IBOutlet weak var toggleTrackingButton: UIButton!
     @IBOutlet weak var drawBoundaryButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
@@ -25,7 +25,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     private let currentLocation = CLLocation()
     private let regionRadius: Double = 1000
     private var drawMode = false
-    private var searchMode = false
+    private var trackerMode = false
     private let size: MKMapSize = MKMapSize(width: 5, height: 5)
     private var polygon: MKPolygon = MKPolygon()
     weak var timer: Timer?
@@ -42,12 +42,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         checkLocationServices()
         mapView.mapType = .satelliteFlyover
-        timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(checkStatusWithinPolygon), userInfo: nil, repeats: true)
-        
     }
+    
+    @IBAction func toggleTracker(_ sender: Any) {
+        trackerMode = !trackerMode
+        if(trackerMode) {
+            toggleTrackingButton.setTitle("Tracking", for: .normal)
+            startTimer()
+        } else {
+            toggleTrackingButton.setTitle("Not Tracking", for: .normal)
+            stopTimer()
+        }
+    }
+    
     
     @objc func buttonAction(sender: UIButton!) {
         mapView.isScrollEnabled = false
+        drawBoundaryButton.setTitle("Drawing", for: .normal)
         drawMode = true
     }
     
@@ -117,8 +128,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             points = [] //Reset points
             mapView.isScrollEnabled = true
             drawMode = false
-            searchMode = true
-            checkStatusWithinPolygon()
+            drawBoundaryButton.setTitle("Draw!", for: .normal)
         }
     }
     
@@ -131,6 +141,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         } else {
             print("we are outside")
         }
+    }
+    
+    func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(checkStatusWithinPolygon), userInfo: nil, repeats: true)
+    }
+    
+    func stopTimer() {
+        timer?.invalidate()
     }
 }
 

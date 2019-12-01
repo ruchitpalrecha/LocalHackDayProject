@@ -55,6 +55,9 @@
                                 <state key="normal" title="Tracking Toggle">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="toggleTracker:" destination="aNi-Pe-GvC" eventType="touchUpInside" id="HiS-Ir-zkC"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -76,6 +79,7 @@
                     <connections>
                         <outlet property="drawBoundaryButton" destination="CW2-DR-7qo" id="B7h-zq-djn"/>
                         <outlet property="mapView" destination="iKF-Uy-vy2" id="9Yc-IT-izV"/>
+                        <outlet property="toggleTrackingButton" destination="GWK-ck-2ub" id="a3d-db-QTh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qu2-PO-uI4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
