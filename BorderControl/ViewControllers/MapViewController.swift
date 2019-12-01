@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     var points = [CLLocationCoordinate2D]() {
         didSet {
@@ -23,7 +23,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     private let locationManager = CLLocationManager()
     private let currentLocation = CLLocation()
     private let regionRadius: Double = 1000
-    
+    private var drawMode = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         drawBoundaryButton.setTitle("Draw!", for: .normal)
         drawBoundaryButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
-        mapView.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         
@@ -41,7 +40,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     @objc func buttonAction(sender: UIButton!) {
-      print("Button tapped")
+        mapView.isScrollEnabled = false
+        drawMode = true
+        print("Button tapped")
     }
     
     func centerMapOnUserLocation() {
@@ -76,6 +77,57 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
            centerMapOnUserLocation()
-       }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            
+        if(drawMode) {
+            mapView.removeOverlays(mapView.overlays) //Reset shapes
+            if let touch = touches.first {
+                let coordinate = mapView.convert(touch.location(in: mapView), toCoordinateFrom: mapView)
+                points.append(coordinate)
+            }
+        }
+        }
+        
+        override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+            if(drawMode) {
+            if let touch = touches.first {
+                let coordinate = mapView.convert(touch.location(in: mapView), toCoordinateFrom: mapView)
+                points.append(coordinate)
+                let polyline = MKPolyline(coordinates: points, count: points.count)
+                mapView.addOverlay(polyline) //Add lines
+                
+            }
+            }
+        }
+        
+        override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+            if(drawMode) {
+            let polygon = MKPolygon(coordinates: &points, count: points.count)
+            print("make polygon")
+            mapView.addOverlay(polygon) //Add polygon areas
+            points = [] //Reset points
+            mapView.isScrollEnabled = true
+                drawMode = false
+            }
+        }
+    }
 
+extension MapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        print("Workied")
+        if (overlay is MKPolyline) {
+            let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+            polylineRenderer.strokeColor = .orange
+            polylineRenderer.lineWidth = 5
+            return polylineRenderer
+        } else if (overlay is MKPolygon) {
+            let polygonView = MKPolygonRenderer(overlay: overlay)
+            polygonView.fillColor = .magenta
+            return polygonView
+        }
+        return MKPolylineRenderer(overlay: overlay)
+    }
 }
