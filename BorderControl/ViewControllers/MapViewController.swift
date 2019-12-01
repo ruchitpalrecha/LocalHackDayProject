@@ -72,7 +72,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
       switch CLLocationManager.authorizationStatus() {
       case .authorizedWhenInUse:
         mapView.showsUserLocation = true
-       case .denied: // Show alert telling users how to turn on permissions
+      case .denied: // Show alert telling users how to turn on permissions
        break
       case .notDetermined:
         locationManager.requestWhenInUseAuthorization()
@@ -97,31 +97,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 points.append(coordinate)
             }
         }
-        }
+    }
         
-        override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-            if(drawMode) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if(drawMode) {
             if let touch = touches.first {
                 let coordinate = mapView.convert(touch.location(in: mapView), toCoordinateFrom: mapView)
                 points.append(coordinate)
                 let polyline = MKPolyline(coordinates: points, count: points.count)
                 mapView.addOverlay(polyline) //Add lines
-                
-            }
             }
         }
+    }
         
-        override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-            if(drawMode) {
-                polygon = MKPolygon(coordinates: &points, count: points.count)
-                mapView.addOverlay(polygon) //Add polygon areas
-                points = [] //Reset points
-                mapView.isScrollEnabled = true
-                drawMode = false
-                searchMode = true
-                checkStatusWithinPolygon()
-            }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if(drawMode) {
+            polygon = MKPolygon(coordinates: &points, count: points.count)
+            mapView.addOverlay(polygon) //Add polygon areas
+            points = [] //Reset points
+            mapView.isScrollEnabled = true
+            drawMode = false
+            searchMode = true
+            checkStatusWithinPolygon()
         }
+    }
     
     @objc func checkStatusWithinPolygon() {
         guard let coordinate = locationManager.location?.coordinate else {return}
