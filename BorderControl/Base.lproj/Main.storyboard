@@ -37,12 +37,21 @@
                                     <outlet property="delegate" destination="aNi-Pe-GvC" id="jtU-4K-nhA"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CW2-DR-7qo">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CW2-DR-7qo">
                                 <rect key="frame" x="0.0" y="759" width="414" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="cCs-8g-0eH"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Draw Boundary">
+                                            <attributes>
+                                                <color key="NSColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <font key="NSFont" size="37" name="Skia-Regular"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
