@@ -38,6 +38,13 @@
                                     <outlet property="delegate" destination="aNi-Pe-GvC" id="jtU-4K-nhA"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9XS-2L-9de">
+                                <rect key="frame" x="358" y="44" width="56" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Status">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CW2-DR-7qo">
                                 <rect key="frame" x="0.0" y="759" width="414" height="54"/>
                                 <constraints>
@@ -62,12 +69,15 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Clf-xJ-DmS" firstAttribute="trailing" secondItem="9XS-2L-9de" secondAttribute="trailing" id="6fk-ao-SUM"/>
                             <constraint firstItem="Clf-xJ-DmS" firstAttribute="trailing" secondItem="CW2-DR-7qo" secondAttribute="trailing" id="MgR-ba-ipO"/>
                             <constraint firstItem="iKF-Uy-vy2" firstAttribute="leading" secondItem="Clf-xJ-DmS" secondAttribute="leading" id="P2k-lt-fnQ"/>
+                            <constraint firstItem="Clf-xJ-DmS" firstAttribute="trailing" secondItem="9XS-2L-9de" secondAttribute="trailing" id="QVA-pn-XbB"/>
                             <constraint firstItem="GWK-ck-2ub" firstAttribute="top" secondItem="Clf-xJ-DmS" secondAttribute="top" id="Rge-ZM-g1e"/>
                             <constraint firstItem="Clf-xJ-DmS" firstAttribute="trailing" secondItem="iKF-Uy-vy2" secondAttribute="trailing" id="TUS-f8-LJ8"/>
                             <constraint firstItem="iKF-Uy-vy2" firstAttribute="top" secondItem="Clf-xJ-DmS" secondAttribute="top" id="e6G-0B-ZGf"/>
                             <constraint firstItem="Clf-xJ-DmS" firstAttribute="bottom" secondItem="CW2-DR-7qo" secondAttribute="bottom" id="qec-4y-cEO"/>
+                            <constraint firstItem="9XS-2L-9de" firstAttribute="top" secondItem="Clf-xJ-DmS" secondAttribute="top" id="vGm-wn-EQF"/>
                             <constraint firstItem="Clf-xJ-DmS" firstAttribute="trailing" secondItem="CW2-DR-7qo" secondAttribute="trailing" id="vii-cr-YF7"/>
                             <constraint firstItem="Clf-xJ-DmS" firstAttribute="bottom" secondItem="iKF-Uy-vy2" secondAttribute="bottom" id="wQ3-Dm-Tug"/>
                             <constraint firstItem="GWK-ck-2ub" firstAttribute="leading" secondItem="Clf-xJ-DmS" secondAttribute="leading" id="wYa-FL-Pnt"/>
