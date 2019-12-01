@@ -42,7 +42,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @objc func buttonAction(sender: UIButton!) {
         mapView.isScrollEnabled = false
         drawMode = true
-        print("Button tapped")
     }
     
     func centerMapOnUserLocation() {
@@ -105,7 +104,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
             if(drawMode) {
             let polygon = MKPolygon(coordinates: &points, count: points.count)
-            print("make polygon")
             mapView.addOverlay(polygon) //Add polygon areas
             points = [] //Reset points
             mapView.isScrollEnabled = true
@@ -117,7 +115,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        print("Workied")
         if (overlay is MKPolyline) {
             let polylineRenderer = MKPolylineRenderer(overlay: overlay)
             polylineRenderer.strokeColor = .orange
