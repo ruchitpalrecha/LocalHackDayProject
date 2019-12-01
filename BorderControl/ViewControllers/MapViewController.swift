@@ -30,6 +30,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     private var polygon: MKPolygon = MKPolygon()
     weak var timer: Timer?
     
+    let alert = UIAlertController(title: "You are outside the designated zone", message: "It's recommended you return back.", preferredStyle: .alert)
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +46,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         checkLocationServices()
         mapView.mapType = .satelliteFlyover
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+
     }
     
     @IBAction func toggleTracker(_ sender: Any) {
@@ -139,6 +145,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         if(polygon.intersects(rect)) {
             print("we are inside")
         } else {
+            self.present(alert, animated: true)
+            trackerMode = !trackerMode
+            toggleTrackingButton.setTitle("Not Tracking", for: .normal)
+            stopTimer()
             print("we are outside")
         }
     }
